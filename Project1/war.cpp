@@ -39,10 +39,13 @@ std::ostream& operator<<( std::ostream& os, const Rank& rank )
 
 class Deck {
     struct Card cards[52];
-    int getCard(int pos){
-        return card[pos];
-    }
   public:
+    int getRank(int pos){
+            return cards[pos+1].rank;
+    }
+    int getSuit(int pos){
+        return cards[pos+1].suit;
+    }
     Deck(){
         int index = 0;
         for(int i = 1; i < 5; i++){
@@ -116,19 +119,48 @@ int main(){
 
     Deck deck;
 
+    int player1score = 0;
+    int player2score = 0;
+
     for(int x = 0; x < 26; x++)
     {
         int card1 = randDeckOrder.at(randDeckOrder.size()-1);
         int card2 = randDeckOrder.at(randDeckOrder.size()-2);
+        int card1rank = deck.getRank(card1);
+        int card2rank = deck.getRank(card2);
         std::cout << "Iteration " << x << " || Drawing two cards|| Card 1: " << card1 << "  ,  Card 2: " << card2 << "\n";
 
-        std::cout << "The card1 value is:"
+        std::cout << "The card1 value is: " << card1rank << ", and the card2 value is: " << card2rank << "\n";
 
         randDeckOrder.pop_back();
         randDeckOrder.pop_back();
+
+        std::cout << "Player 1 has played the card: " << card1rank << "\n";
+        std::cout << "Player 2 has played the card: " << card2rank << "\n";
+        if(card1rank > card2rank){
+            std::cout << "Player 1 has won the hand\n";
+            player1score++;
+        }
+        else if(card1rank < card2rank){
+            std::cout << "Player 2 has won the hand\n";
+            player2score++;
+        }
+        else{
+            std::cout << "The hand ended in a draw\n";
+        }
+
     }
 
+    std::cout << "----------------\n";
 
-    //deck.print();
+    if(player1score > player2score){
+        std::cout << "Player 1 has won the game!\n";
+    }
+    else if(player1score < player2score){
+        std::cout << "Player 2 has won the game!\n";
+    }
+    else{
+        std::cout << "The game has ended in a draw!\n";
+    }
 
 }
