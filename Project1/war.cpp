@@ -115,8 +115,6 @@ int main(){
     std::shuffle(randDeckOrder.begin(), randDeckOrder.end(), e);
        
 
-    std::cout << "The main program starts!\n";
-
     Deck deck;
 
     int player1score = 0;
@@ -128,9 +126,6 @@ int main(){
         int card2 = randDeckOrder.at(randDeckOrder.size()-2);
         int card1rank = deck.getRank(card1);
         int card2rank = deck.getRank(card2);
-        std::cout << "Iteration " << x << " || Drawing two cards|| Card 1: " << card1 << "  ,  Card 2: " << card2 << "\n";
-
-        std::cout << "The card1 value is: " << card1rank << ", and the card2 value is: " << card2rank << "\n";
 
         randDeckOrder.pop_back();
         randDeckOrder.pop_back();
@@ -152,6 +147,8 @@ int main(){
     }
 
     std::cout << "----------------\n";
+
+    std::cout << "Player 1 score: " << player1score << " || Player 2 score: " << player2score << "\n";
 
     if(player1score > player2score){
         std::cout << "Player 1 has won the game!\n";
