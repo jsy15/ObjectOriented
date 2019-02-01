@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+//Enums for the suit and ranks
 enum Suit {
   Hearts,
   Clubs,
@@ -30,10 +31,9 @@ struct Card {
     Suit suit;
     Rank rank;
 
-  public:
-    void testFunc();
 };
 
+//Overloading the ostream operator to fix the enums for output
 inline std::ostream& operator<<( std::ostream& os, const Suit& suit )
 {
    switch( suit )

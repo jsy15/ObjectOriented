@@ -10,6 +10,8 @@ class Deck {
     Suit getSuit(int pos);
     Deck();
 
+    void playWar();
+
     void print();
 };
 
