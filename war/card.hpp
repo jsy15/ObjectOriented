@@ -4,10 +4,10 @@
 #include <iostream>
 
 enum Suit {
-  Heart,
-  Club,
-  Diamond,
-  Spade
+  Hearts,
+  Clubs,
+  Diamonds,
+  Spades
 };
 
 enum Rank {
@@ -38,10 +38,10 @@ inline std::ostream& operator<<( std::ostream& os, const Suit& suit )
 {
    switch( suit )
    {
-      case Heart: os << "heart"; break;
-      case Club: os << "club"; break;
-      case Diamond: os << "diamond"; break;
-      case Spade: os << "spade"; break;
+      case Hearts: os << "Hearts"; break;
+      case Clubs: os << "Clubs"; break;
+      case Diamonds: os << "Diamonds"; break;
+      case Spades: os << "Spades"; break;
    }
    return os;
 };
@@ -58,7 +58,7 @@ inline std::ostream& operator<<( std::ostream& os, const Rank& rank )
       case seven: os << "7"; break;
       case eight: os << "8"; break;
       case nine: os << "9"; break;
-      case ten: os << "10"; break;
+      case ten: os << "T"; break;
       case jack: os << "J"; break;
       case queen: os << "Q"; break;
       case king: os << "K"; break;

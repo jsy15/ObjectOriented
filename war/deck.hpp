@@ -6,8 +6,8 @@
 class Deck {
     struct Card cards[52];
   public:
-    int getRank(int pos);
-    int getSuit(int pos);
+    Rank getRank(int pos);
+    Suit getSuit(int pos);
     Deck();
 
     void print();

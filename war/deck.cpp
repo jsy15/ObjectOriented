@@ -1,10 +1,11 @@
 #include "deck.hpp"
+#include <iostream>
 
-int Deck::getRank(int pos){
+Rank Deck::getRank(int pos){
             return cards[pos+1].rank;
     }
 
-int Deck::getSuit(int pos){
+Suit Deck::getSuit(int pos){
         return cards[pos+1].suit;
     }
 
@@ -14,13 +15,13 @@ Deck::Deck(){
             for(int e = 1; e < 14; e++ ){
                 int test = 0;
                 switch(i) {
-                    case 1: cards[index].suit = Heart; 
+                    case 1: cards[index].suit = Hearts; 
                         break;
-                    case 2: cards[index].suit = Club; 
+                    case 2: cards[index].suit = Clubs; 
                         break;
-                    case 3: cards[index].suit = Diamond;
+                    case 3: cards[index].suit = Diamonds;
                         break;
-                    case 4: cards[index].suit = Spade;
+                    case 4: cards[index].suit = Spades;
                         break;
 
                 }

@@ -37,8 +37,8 @@ int main(){
         randDeckOrder.pop_back();
         randDeckOrder.pop_back();
 
-        std::cout << "Player 1 has played the card: " << card1rank << "\n";
-        std::cout << "Player 2 has played the card: " << card2rank << "\n";
+        std::cout << "Player 1 has played the card: " << deck.getRank(card1) << " of " << deck.getSuit(card1) << "\n";
+        std::cout << "Player 2 has played the card: " << deck.getRank(card2) << " of " << deck.getSuit(card2) << "\n";
         if(card1rank > card2rank){
             std::cout << "Player 1 has won the hand\n";
             player1score++;
