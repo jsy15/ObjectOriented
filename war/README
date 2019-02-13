@@ -7,5 +7,3 @@ To build:
 2. "cmake .."
 3. "make"
 4. "./war"
-
-The actual gameplay of war is contained in the Deck class. The deck class function play() starts the game after the Deck class initalizes the deck. 
