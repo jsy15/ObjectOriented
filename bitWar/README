@@ -1,0 +1,11 @@
+This a Object Oriented approach to the card game of war. It use use enums to create the ranks and suits of cards in a deck. The enums are put into a card class. 
+This card class contains all the information needed about a card. The Card class is put into a deck class that deals with all of the cards. The deck also creates
+the entire deck of cards. 
+
+To build:
+1. "mkdir build"
+2. "cmake .."
+3. "make"
+4. "./war"
+
+The actual gameplay of war is contained in the Deck class. The deck class function play() starts the game after the Deck class initalizes the deck. 
