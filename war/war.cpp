@@ -1,9 +1,16 @@
-#include "game.hpp"
+#include "card.hpp"
+#include "deck.hpp"
+
+
+
+
 
 int main(){
     
     //Creates the Deck object and starts the game of war
-    Game game;
-    game.play_game();  
+    Deck deck;
+    deck.playWar();
     
+
+    return 0;
 }

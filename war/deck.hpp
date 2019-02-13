@@ -1,15 +1,18 @@
 #ifndef DECK_H
 #define DECK_H
 
-#include "deck.hpp"
 #include "card.hpp"
-#include <deque>
-#include <iosfwd>
 
-struct Deck : std::deque<Card> {
-  using std::deque<Card>::deque;
+class Deck {
+    struct Card cards[52];
+  public:
+    Rank getRank(int pos);
+    Suit getSuit(int pos);
+    Deck();
+
+    void playWar();
+
+    void print();
 };
-
-std::ostream& operator<<(std::ostream& os, Deck const& d);
 
 #endif
