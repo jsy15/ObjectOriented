@@ -2,34 +2,52 @@
 #define CARD_H
 
 #include <iostream>
+#include <iosfwd>
 
 //Enums for the suit and ranks
 enum Suit {
   Hearts,
-  Clubs,
   Diamonds,
+  Clubs,
   Spades
 };
 
 enum Rank {
-  two,
-  three,
-  four,
-  five,
-  six,
-  seven,
-  eight,
-  nine,
-  ten,
-  jack,
-  queen,
-  king, 
-  ace
+  Ace,
+  Two,
+  Three,
+  Four,
+  Five,
+  Six,
+  Seven,
+  Eight,
+  Nine,
+  Ten,
+  Jack,
+  Queen,
+  King
 };
 
-struct Card {
-    Suit suit;
-    Rank rank;
+class Card {
+   public:
+
+      //Default contstructor needs to be declared
+      Card() = default;
+
+      Card(Rank r, Suit s)
+         : bits((unsigned)s << 4 | (unsigned)r)
+      {}
+
+      Rank get_rank() const {
+         return (Rank) (0b001111 & bits);
+      }
+
+      Suit get_suit() const {
+         return (Suit)((0b110000 & bits) >> 4);
+      } 
+
+   private:
+      unsigned char bits;
 
 };
 
@@ -38,10 +56,10 @@ inline std::ostream& operator<<( std::ostream& os, const Suit& suit )
 {
    switch( suit )
    {
-      case Hearts: os << "Hearts"; break;
-      case Clubs: os << "Clubs"; break;
-      case Diamonds: os << "Diamonds"; break;
-      case Spades: os << "Spades"; break;
+      case Hearts: os << "H"; break;
+      case Clubs: os << "C"; break;
+      case Diamonds: os << "D"; break;
+      case Spades: os << "S"; break;
    }
    return os;
 };
@@ -50,21 +68,39 @@ inline std::ostream& operator<<( std::ostream& os, const Rank& rank )
 {
    switch( rank )
    {
-      case two: os << "2"; break;
-      case three: os << "3"; break;
-      case four: os << "4"; break;
-      case five: os << "5"; break;
-      case six: os << "6"; break;
-      case seven: os << "7"; break;
-      case eight: os << "8"; break;
-      case nine: os << "9"; break;
-      case ten: os << "T"; break;
-      case jack: os << "J"; break;
-      case queen: os << "Q"; break;
-      case king: os << "K"; break;
-      case ace: os << "A"; break;
+      case Two: os << "2"; break;
+      case Three: os << "3"; break;
+      case Four: os << "4"; break;
+      case Five: os << "5"; break;
+      case Six: os << "6"; break;
+      case Seven: os << "7"; break;
+      case Eight: os << "8"; break;
+      case Nine: os << "9"; break;
+      case Ten: os << "T"; break;
+      case Jack: os << "J"; break;
+      case Queen: os << "Q"; break;
+      case King: os << "K"; break;
+      case Ace: os << "A"; break;
    }
    return os;
 };
+
+inline std::ostream& operator<<( std::ostream& os, const Card& c )
+{
+   return os << c.get_rank() << c.get_suit();
+};
+
+bool operator==(Card a, Card b);
+bool operator!=(Card a, Card b);
+
+bool operator<(Card a, Card b);
+bool operator>(Card a, Card b);
+bool operator<=(Card a, Card b);
+bool operator>=(Card a, Card b);
+
+
+
+
+
 
 #endif

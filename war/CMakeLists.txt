@@ -1,2 +1,2 @@
 set (CMAKE_CXX_STANDARD 11)
-add_executable(war war.cpp card.cpp deck.cpp)
+add_executable(test test.cpp card.cpp deck.cpp game.cpp)
