@@ -101,12 +101,6 @@ void Game::play_game(){
     shuffle();
     print();
     war();
-    if(player1.hand.size() == 52){
-        std::cout << "Player 1 has won the game!\n";
-    }
-    else{
-        std::cout << "Player 2 has won the game\n";
-    }
 }
 
 void Game::war(){
@@ -121,7 +115,18 @@ void Game::war(){
         std::cout << player1.hand.front() << " vs " << player2.hand.front() << std::endl;
         if(player1.hand.front().get_rank() == player2.hand.front().get_rank()){
             std::cout << "MATCH\n";
-            
+            isSameRank = true;            
+        }
+
+        if(isSameRank && player1.hand.size() <= 3){
+            std::cout << "Player 1 does not have enough cards to war, Player 2 wins! \n";
+            std::cout << "The game has run for " << steps << " steps.\n";
+            return;
+        }
+        else if(isSameRank && player2.hand.size() <= 3){
+            std::cout << "Player 2 does not have enough cards to war, Player 1 wins!\n";
+            std::cout << "The game has run for " << steps << " steps.\n";
+            return;
         }
 
         while((player1.hand.front().get_rank() == player2.hand.front().get_rank()) && (player1.hand.size() > 3 && player2.hand.size() > 3)){ 
@@ -131,7 +136,6 @@ void Game::war(){
             draw.push_back(player2.hand.front());
             player2.hand.pop_front();        
             }
-            isSameRank = true;
         }
 
         if(isSameRank){
@@ -158,12 +162,14 @@ void Game::war(){
         }
         else{
             if(player1.hand.front().get_rank() > player2.hand.front().get_rank()){
+                std::cout << "Player 1 has won the hand!\n";
                 player1.hand.push_back(player1.hand.front());
                 player1.hand.push_back(player2.hand.front());
                 player1.hand.erase(player1.hand.begin());
                 player2.hand.erase(player2.hand.begin());
             }
             else{
+                std::cout << "Player 2 has won the hand!\n";
                 player2.hand.push_back(player1.hand.front());
                 player2.hand.push_back(player2.hand.front());
                 player2.hand.erase(player2.hand.begin());
@@ -171,13 +177,18 @@ void Game::war(){
             }
         }
         draw.clear();
-
-        std::cout << "Player1 hand size is: " << player1.hand.size() << ", Player2 hand size: " << player2.hand.size() << ".\n";
         ;
 
         if((player1.hand.size() <= 0 || player2.hand.size() <= 0)|| (player1.hand.size() == 52 || player2.hand.size() == 52)){
             isGameOver = true;
         }
     }
-    std::cout << "The game has run for " << steps << " steps.\n";
+    if(player1.hand.size() == 52){
+        std::cout << "Player 1 has won the game!\n";
+        std::cout << "The game has run for " << steps << " steps.\n";
+    }
+    else{
+        std::cout << "Player 2 has won the game\n";
+        std::cout << "The game has run for " << steps << " steps.\n";
+    }
 }
