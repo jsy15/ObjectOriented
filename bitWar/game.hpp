@@ -11,6 +11,8 @@ class Game {
     Player player1;
     Player player2;
     std::vector<Card> draw;
+    std::vector<Card> tempPlay1;
+    std::vector<Card> tempPlay2;
     public:
     Game();
     void play_game();

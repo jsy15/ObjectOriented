@@ -62,13 +62,13 @@ Game::Game(){
 }
 
 void Game::print(){
-    for(int i = 0; i < 26; ++i){
+    for(int i = 0; i < player1.hand.size(); ++i){
         std::cout << "Player 1 Card #" << i+1 << "with card: " << player1.hand.at(i) << std::endl;
     }
 
     std::cout << std::endl;
 
-    for(int i = 0; i < 26; ++i){
+    for(int i = 0; i < player2.hand.size(); ++i){
 
         std::cout << "Player 2 Card # " << i+1 << "with card: " <<  player2.hand.at(i) << std::endl;
     }
@@ -101,51 +101,83 @@ void Game::play_game(){
     shuffle();
     print();
     war();
-    std::cout << "Player 1 score: " << player1.score << std::endl;
-    std::cout << "Player 2 score: " << player2.score << std::endl;
-    std::cout << "Total score: " << player1.score + player2.score << std::endl;
+    if(player1.hand.size() == 52){
+        std::cout << "Player 1 has won the game!\n";
+    }
+    else{
+        std::cout << "Player 2 has won the game\n";
+    }
 }
 
 void Game::war(){
-    bool tie = false;
+    bool isGameOver = false;
+    bool isSameRank = false;
+    int steps = 0;
 
+    while(!isGameOver){
+        steps++;
+        isSameRank = false;
 
-    while(!player1.hand.empty() && !player2.hand.empty()){
-        tie = false;
-        while(player1.hand.front().get_rank() == player2.hand.front().get_rank()){
+        std::cout << player1.hand.front() << " vs " << player2.hand.front() << std::endl;
+        if(player1.hand.front().get_rank() == player2.hand.front().get_rank()){
+            std::cout << "MATCH\n";
+            
+        }
+
+        while((player1.hand.front().get_rank() == player2.hand.front().get_rank()) && (player1.hand.size() > 3 && player2.hand.size() > 3)){ 
+            for(int x = 0; x < 3; ++x){           
             draw.push_back(player1.hand.front());
-            draw.push_back(player2.hand.front());
             player1.hand.pop_front();
-            player2.hand.pop_front();
-            tie = true;
+            draw.push_back(player2.hand.front());
+            player2.hand.pop_front();        
+            }
+            isSameRank = true;
         }
-        if(player1.hand.front().get_rank() > player2.hand.front().get_rank()){
-            player1.hand.push_back(player1.hand.front());
-            player1.hand.push_back(player2.hand.front());
-            if(tie){
-                while(!draw.empty()){
-                    player1.hand.push_back(draw.back());
-                    draw.pop_back();
+
+        if(isSameRank){
+            if(player1.hand.front().get_rank() > player2.hand.front().get_rank()){
+                std::cout << "Player 1 won the war\n";
+                for(std::vector<Card>::iterator it = draw.begin(); it != draw.end(); ++it){
+                    player1.hand.push_back((*it));
                 }
+                player1.hand.push_back(player1.hand.front());
+                player1.hand.pop_front();
+                player1.hand.push_back(player2.hand.front());
+                player2.hand.pop_front();
+            }
+            else if(player1.hand.front().get_rank() < player2.hand.front().get_rank()){
+                std::cout << "Player 2 won the war\n";
+                for(std::vector<Card>::iterator it = draw.begin(); it != draw.end(); ++it){
+                    player2.hand.push_back((*it));
+                }
+                player2.hand.push_back(player2.hand.front());
+                player2.hand.pop_front();
+                player2.hand.push_back(player1.hand.front());
+                player1.hand.pop_front();
             }
         }
-        else if(player1.hand.front().get_rank() < player2.hand.front().get_rank()){
-            player2.hand.push_back(player1.hand.front());
-            player2.hand.push_back(player2.hand.front());
-            if(tie){
-                while(!draw.empty()){
-                    player2.hand.push_back(draw.back());
-                    draw.pop_back();
-                }
+        else{
+            if(player1.hand.front().get_rank() > player2.hand.front().get_rank()){
+                player1.hand.push_back(player1.hand.front());
+                player1.hand.push_back(player2.hand.front());
+                player1.hand.erase(player1.hand.begin());
+                player2.hand.erase(player2.hand.begin());
+            }
+            else{
+                player2.hand.push_back(player1.hand.front());
+                player2.hand.push_back(player2.hand.front());
+                player2.hand.erase(player2.hand.begin());
+                player1.hand.erase(player1.hand.begin());
             }
         }
-        std::cout << "Player1 handsize: " << player1.hand.size() << ", Player2 handsize: " << player2.hand.size() << std::endl;
-        Card player1hold = player1.hand.front();
-        Card player2hold = player2.hand.front();
-        player1.hand.pop_front();
-        player2.hand.pop_front();
+        draw.clear();
 
+        std::cout << "Player1 hand size is: " << player1.hand.size() << ", Player2 hand size: " << player2.hand.size() << ".\n";
+        ;
 
+        if((player1.hand.size() <= 0 || player2.hand.size() <= 0)|| (player1.hand.size() == 52 || player2.hand.size() == 52)){
+            isGameOver = true;
+        }
     }
-    
+    std::cout << "The game has run for " << steps << " steps.\n";
 }
