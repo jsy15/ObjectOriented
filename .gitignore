@@ -1,0 +1,7 @@
+../.vscode/
+../war/.vscode/
+../war/game.cpp
+../war/game.hpp
+../war/player.cpp
+../war/player.hpp
+../war/test.cpp
