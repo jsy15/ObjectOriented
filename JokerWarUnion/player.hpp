@@ -5,7 +5,7 @@
 #include "card.hpp"
 
 struct Player{
-    std::deque<Card> hand;
+    std::deque<StandardCard> hand;
     int score = 0;
 };
 

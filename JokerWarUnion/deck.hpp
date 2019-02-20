@@ -6,8 +6,8 @@
 #include <deque>
 #include <iosfwd>
 
-struct Deck : std::deque<Card> {
-  using std::deque<Card>::deque;
+struct Deck : std::deque<StandardCard> {
+  using std::deque<StandardCard>::deque;
 };
 
 std::ostream& operator<<(std::ostream& os, Deck const& d);

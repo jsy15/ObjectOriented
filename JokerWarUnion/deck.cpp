@@ -6,7 +6,7 @@ std::ostream&
 operator<<(std::ostream& os, Deck const& d)
 {
   int n = 0;
-  for (Card c : d) {
+  for (StandardCard c : d) {
     os << c << ' ';
     if (n == 12) {
       os << '\n';

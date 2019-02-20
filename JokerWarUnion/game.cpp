@@ -63,14 +63,14 @@ Game::Game(){
 
 void Game::print(){
     for(int i = 0; i < player1.hand.size(); ++i){
-        std::cout << "Player 1 Card #" << i+1 << "with card: " << player1.hand.at(i) << std::endl;
+        std::cout << "Player 1 StandardCard #" << i+1 << "with StandardCard: " << player1.hand.at(i) << std::endl;
     }
 
     std::cout << std::endl;
 
     for(int i = 0; i < player2.hand.size(); ++i){
 
-        std::cout << "Player 2 Card # " << i+1 << "with card: " <<  player2.hand.at(i) << std::endl;
+        std::cout << "Player 2 StandardCard # " << i+1 << "with StandardCard: " <<  player2.hand.at(i) << std::endl;
     }
 }
 
@@ -81,11 +81,11 @@ void Game::shuffle(){
     std::shuffle(d.begin(), d.end(), prng);
     std::cout << d << '\n';
 
-    Card holding1;
-    Card holding2;
+    StandardCard holding1;
+    StandardCard holding2;
 
 
-    //Iterate through deck and give cards alternatively to each player
+    //Iterate through deck and give StandardCards alternatively to each player
     while(!d.empty()){
         holding1 = d.front();
         d.pop_front();
@@ -119,12 +119,12 @@ void Game::war(){
         }
 
         if(isSameRank && player1.hand.size() <= 3){
-            std::cout << "Player 1 does not have enough cards to war, Player 2 wins! \n";
+            std::cout << "Player 1 does not have enough StandardCards to war, Player 2 wins! \n";
             std::cout << "The game has run for " << steps << " steps.\n";
             return;
         }
         else if(isSameRank && player2.hand.size() <= 3){
-            std::cout << "Player 2 does not have enough cards to war, Player 1 wins!\n";
+            std::cout << "Player 2 does not have enough StandardCards to war, Player 1 wins!\n";
             std::cout << "The game has run for " << steps << " steps.\n";
             return;
         }
@@ -141,7 +141,7 @@ void Game::war(){
         if(isSameRank){
             if(player1.hand.front().get_rank() > player2.hand.front().get_rank()){
                 std::cout << "Player 1 won the war\n";
-                for(std::vector<Card>::iterator it = draw.begin(); it != draw.end(); ++it){
+                for(std::vector<StandardCard>::iterator it = draw.begin(); it != draw.end(); ++it){
                     player1.hand.push_back((*it));
                 }
                 player1.hand.push_back(player1.hand.front());
@@ -151,7 +151,7 @@ void Game::war(){
             }
             else if(player1.hand.front().get_rank() < player2.hand.front().get_rank()){
                 std::cout << "Player 2 won the war\n";
-                for(std::vector<Card>::iterator it = draw.begin(); it != draw.end(); ++it){
+                for(std::vector<StandardCard>::iterator it = draw.begin(); it != draw.end(); ++it){
                     player2.hand.push_back((*it));
                 }
                 player2.hand.push_back(player2.hand.front());

@@ -28,13 +28,13 @@ enum Rank {
   King
 };
 
-class Card {
+class StandardCard {
    public:
 
       //Default contstructor needs to be declared
-      Card() = default;
+      StandardCard() = default;
 
-      Card(Rank r, Suit s)
+      StandardCard(Rank r, Suit s)
          : bits((unsigned)s << 4 | (unsigned)r)
       {}
 
@@ -85,18 +85,18 @@ inline std::ostream& operator<<( std::ostream& os, const Rank& rank )
    return os;
 };
 
-inline std::ostream& operator<<( std::ostream& os, const Card& c )
+inline std::ostream& operator<<( std::ostream& os, const StandardCard& c )
 {
    return os << c.get_rank() << c.get_suit();
 };
 
-bool operator==(Card a, Card b);
-bool operator!=(Card a, Card b);
+bool operator==(StandardCard a, StandardCard b);
+bool operator!=(StandardCard a, StandardCard b);
 
-bool operator<(Card a, Card b);
-bool operator>(Card a, Card b);
-bool operator<=(Card a, Card b);
-bool operator>=(Card a, Card b);
+bool operator<(StandardCard a, StandardCard b);
+bool operator>(StandardCard a, StandardCard b);
+bool operator<=(StandardCard a, StandardCard b);
+bool operator>=(StandardCard a, StandardCard b);
 
 
 
