@@ -5,10 +5,10 @@
 /war/player.cpp
 /war/player.hpp
 /war/test.cpp
-JokerWarUnion/.backupfile
-JokerWarUnion/.vscode/
+jokerUnion/.backupfile
+jokerUnion/.vscode/
 bitWar/.backupfile
 bitWar/build
 bitWarbackup/
-JokerWarUnion/build/
+jokerUnion/build/
 game-snake/build/
