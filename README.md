@@ -1,9 +1,9 @@
 # ObjectOriented
 Repository for Object Oriented Class
 
-Practice 3: 
+## Practice 3: 
     bitWar/ is the directory
-    
+
     To build:
         1. mkdir build
         2. cd build
@@ -13,11 +13,11 @@ Practice 3:
         1. ./war
 
 
-Practice 4:
+## Practice 4:
     jokerUnion/ is the directory for the tagged union implementation of the joker and standard cards
     jokerBinary/ is the directory for the binary implementation of the joker and standard cards
 
-Project (milestone 2):
+## Project (milestone 2):
     game-snake/ is the directory
     Updated game-snake/ with header/source pairs.
 
