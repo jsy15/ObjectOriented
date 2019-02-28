@@ -3,6 +3,7 @@ Repository for Object Oriented Class
 
 Practice 3: 
     bitWar/ is the directory
+    
     To build:
         1. mkdir build
         2. cd build
