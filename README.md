@@ -23,7 +23,7 @@ Repository for Object Oriented Class
 
     To build:
         Make sure you are in the game-snake directory
-        1. mkdir buikd
+        1. mkdir build
         2. cd build
         3. cmake ..
         4. make
