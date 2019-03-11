@@ -31,4 +31,15 @@ Repository for Object Oriented Class
         While in the build directory
         1. ./snake
 
-    To quit the game simple hit the q button  
+    To quit the game simple hit the q button 
+
+## Practice 5:
+    oopCard/ is the directory
+
+    To build:
+        1. mkdir build
+        2. cd build
+        3. cmake ..
+        4. make
+    To run:
+        1. ./card
