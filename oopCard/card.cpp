@@ -1,5 +1,7 @@
 #include "card.hpp"
 #include <iostream>
+#include <iosfwd>
+#include <cassert>
 
 Card::Card() { }
 
@@ -19,12 +21,21 @@ Color JokerCard::get_color() const {
     return color;
 }
 
-std::ostream& operator<<(std::ostream& os, StandardCard c){
-    os << c.get_rank() << c.get_suit();
+Color StandardCard::get_color() const {
+    assert (false);
+}
+
+std::ostream& operator<<(std::ostream& os, Card& c){
+    c.print(os);
     return os;
 }
 
-std::ostream& operator<<(std::ostream& os, JokerCard c){
+std::ostream& operator<<(std::ostream& os, StandardCard& c){
+    os << c.rank << c.suit;
+    return os;
+}
+
+std::ostream& operator<<(std::ostream& os, JokerCard& c){
     os << c.get_color();
     return os;
 }
@@ -72,4 +83,12 @@ std::ostream& operator<<(std::ostream& os, Kind k){
         case 1: os << "J"; break;
     }
     return os;
+}
+
+void StandardCard::print(std::ostream& os) const {
+    os << this;
+}
+
+void JokerCard::print(std::ostream& os) const {
+    os << this;
 }

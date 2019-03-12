@@ -1,7 +1,7 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include <iosfwd>
+#include <iostream>
 
 enum Suit {
   Spades,
@@ -37,38 +37,43 @@ enum Kind {
 };
 
 class Card {
-    Kind kind;
   public:
+    Kind kind;
     Card();
     Card(Kind k)
       : kind(k)
     { }
     Kind get_kind() const;
+    virtual void print(std::ostream& os) const = 0;
+    virtual Color get_color() const = 0;
 };
 
 class StandardCard : Card {
+  public:
     Rank rank;
     Suit suit;
-  public:
     StandardCard(Rank r, Suit s)
-      : rank(r), suit(s)
+      : Card(SCard), rank(r), suit(s)
     { }
     Rank get_rank() const;
     Suit get_suit() const;
+    void print(std::ostream& os) const override;
+    Color get_color() const override;
 };
 
 class JokerCard : Card {
-    Color color;
   public:
+    Color color;
     JokerCard(Color c)
-      : color(c)
+      : Card(JCard), color(c)
     { }
-    Color get_color() const;
+    Color get_color() const override;
+    void print(std::ostream& os) const override;
 };
 
-std::ostream& operator<<(std::ostream& os, StandardCard c);
-std::ostream& operator<<(std::ostream& os, JokerCard c);
-std::ostream& operator<<(std::ostream& os, Card c);
+std::ostream& operator<<(std::ostream& os, StandardCard& c);
+std::ostream& operator<<(std::ostream& os, JokerCard& c);
+std::ostream& operator<<(std::ostream& os, Card& c);
 std::ostream& operator<<(std::ostream& os, Suit s);
 std::ostream& operator<<(std::ostream& os, Rank r);
 std::ostream& operator<<(std::ostream& os, Color c);
