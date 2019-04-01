@@ -67,7 +67,6 @@ namespace json
       return "nope";
     }
 
-    // Returns the pointer to the Array at the specified int index 
     virtual Value* index(int index) {
       Value* temp;
       return temp;
