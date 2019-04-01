@@ -43,3 +43,16 @@ Repository for Object Oriented Class
         4. make
     To run:
         1. ./card
+
+## Practice 5:
+    json/ is the directory
+
+    Make sure that the test json file is downloaded:
+        1. wget www.reddit.com/r/cpp.json
+    To build:
+        1. mkdir build
+        2. cd build
+        3. cmake ..
+        4. make
+    To run:
+        1. ./json < cpp.json
