@@ -56,3 +56,22 @@ Repository for Object Oriented Class
         4. make
     To run:
         1. ./json < cpp.json
+
+## Project (Milestone 2)
+    /snake-Milestone2 is the directory
+
+    To build:
+        1. mkdir build
+        2. cd build
+        3. cmake ..
+        4. make
+    To run:
+        1. ./snake
+
+    This extended version of snake has several new foods.
+        1. The purple trigger food activates a special food block
+        2. The turquoise food is a superfood that gives the player 3 snake lives
+        3. The pink food appears in groups of 4 and each give a life
+        4. The green food is a deadlyfood which removes 4 lifes and disappears after four regular food is piccked up.
+
+    Each food and trigger is derived from the Fruct class which is the default food. Each special food has its own activate functions. The functions handles manipulating the snake and unlocking the trigger food.
