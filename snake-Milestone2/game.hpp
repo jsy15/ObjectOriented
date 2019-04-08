@@ -12,8 +12,8 @@ class Game{
     Fruct f;
     Trigger specf;
     Trigger trig;
-    Fruct superfood;
-    Fruct multifood[4];
+    SuperFood superfood;
+    MultiFood multifood[4];
     int N;
     int M;
     int dir;
@@ -40,9 +40,11 @@ class Game{
     int multifood3y;    
     bool multiactive;
     int roundactive;
-    Fruct deadlyfood;
+    DeadlyFood deadlyfood;
     int deadfoodx;
     int deadfoody;
+    int deadlyfoodround;
+    bool deadlyactive;
 
     void Tick();
     

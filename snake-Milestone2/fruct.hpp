@@ -49,5 +49,24 @@ class Trigger : public Fruct {
         }
 };
 
+//This class handles the food
+class DeadlyFood : public Fruct {
+    public:
+        void activate(int &x, bool &b);
+};
+
+//This class handles the multifoods 
+class MultiFood : public Fruct {
+    public:
+        void activate(int & x);
+};
+
+//This class handles the superfood
+class SuperFood : public Fruct {
+    public:
+        void activate(int &x, bool &b);
+};
+
+
 
 #endif

@@ -31,6 +31,8 @@ Game::Game(){
     roundactive = 0;
     deadfoodx = (rand() % N);
     deadfoody = (rand() % M);
+    deadlyfoodround = 0;
+    deadlyactive = false;
 };
 
 void Game::play_game(){
@@ -174,6 +176,7 @@ void Game::Tick(){
         s[0].set_y(s[0].get_y() - 1);
 
     if((s[0].get_x() == f.get_x()) && (s[0].get_y() == f.get_y())){
+        deadlyfoodround++;
         num++;
         while(test1 == specx && test2 == specy || test1 == supfoodx && test2 == supfoody || test1 == multifood0x && test2 == multifood0y || test1 == multifood1x && test2 == multifood1y || test1 == multifood2x && test2 == multifood2y || test1 == multifood3x && test2 == multifood3y){
             test1 = (rand() % N);
@@ -218,37 +221,44 @@ void Game::Tick(){
                 break;
             //DeadlyFood path
             case 2:
+                deadlyactive = true;
+                deadlyfoodround = 0;
                 std::cout << "Deadlyfood x: " << deadfoodx << ", Deadlyfood y: " << deadfoody << std::endl;
                 deadlyfood.set_x(deadfoodx);
                 deadlyfood.set_y(deadfoody);
         }
     }
 
-    if(s[0].get_x() == deadlyfood.get_x() && s[0].get_y() == deadlyfood.get_y()){
-        num = 1;
+    if(s[0].get_x() == deadlyfood.get_x() && s[0].get_y() == deadlyfood.get_y() && deadlyfoodround > 3){
+        deadlyfood.activate(num, triggeractive);
         deadlyfood.set_x(-4);
         deadlyfood.set_y(-4);
         specf.setType(-1);
         std::cout << "Deadlyfood reset the lock\n";
+    }
+
+    if(deadlyfoodround > 3 && deadlyactive == true){
+        deadlyactive = false;
+        deadlyfood.set_x(-4);
+        deadlyfood.set_y(-4);
+        specf.setType(-1);
         triggeractive = false;
+        std::cout << "Deadlyfood timed out and reset the lock\n";
     }
 
     
 
     if(s[0].get_x() == superfood.get_x() && s[0].get_y() == superfood.get_y()){
-        num++;
-        num++;
-        num++;
+        superfood.activate(num, triggeractive);
         superfood.set_x(-2);
         superfood.set_y(-2);
         specf.setType(-1);
         std::cout << "Superfood reset the lock\n";
-        triggeractive = false;
     }
 
 
     if(s[0].get_x() == multifood[0].get_x() && s[0].get_y() == multifood[0].get_y()){
-        num++;
+        multifood[0].activate(num);
         std::cout << "The first multifood eaten\n";
         multifood[0].set_x(-3);
         multifood[0].set_y(-3);
@@ -256,7 +266,7 @@ void Game::Tick(){
     }
 
     if(s[0].get_x() == multifood[1].get_x() && s[0].get_y() == multifood[1].get_y()){
-        num++;
+        multifood[0].activate(num);
         std::cout << "The second multifood eaten\n";
         multifood[1].set_x(-3);
         multifood[1].set_y(-3);
@@ -264,7 +274,7 @@ void Game::Tick(){
     }
 
     if(s[0].get_x() == multifood[2].get_x() && s[0].get_y() == multifood[2].get_y()){
-        num++;
+        multifood[0].activate(num);
         std::cout << "The third multifood eaten\n";
         multifood[2].set_x(-3);
         multifood[2].set_y(-3);
@@ -272,7 +282,7 @@ void Game::Tick(){
     }
 
     if(s[0].get_x() == multifood[3].get_x() && s[0].get_y() == multifood[3].get_y()){
-        num++;
+        multifood[0].activate(num);
         std::cout << "The four multifood eaten\n";
         multifood[3].set_x(-3);
         multifood[3].set_y(-3);
@@ -283,6 +293,11 @@ void Game::Tick(){
         std::cout << "Multi reset the lock\n";
         triggeractive = false;
         multiactive = false;
+    }
+
+    if(deadlyfoodround > 3){
+        std::cout << "Restting the round count\n";
+        deadlyfoodround = 0;
     }
 
     if(s[0].get_x() > N)
