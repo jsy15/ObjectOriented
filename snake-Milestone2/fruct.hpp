@@ -39,7 +39,7 @@ class Trigger : public Fruct {
         }
         int trigger(){
             srand(time(0));
-            type = rand() % 2;
+            type = rand() % 3;
         }
         int getType(){
             return type;

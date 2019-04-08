@@ -98,8 +98,11 @@ void Game::Tick(){
 
     if((s[0].get_x() == f.get_x()) && (s[0].get_y() == f.get_y())){
         num++;
-        f.set_x(rand() % N);
-        f.set_y(rand() % M);
+        int test1 = rand() % N;
+        int test2 = rand() % M;
+        f.set_x(test1);
+        f.set_y(test2);
+        std::cout << "I have set the x to : " << test1 << ", and the y to: " << test2 << std::endl;
     }
 
     if(s[0].get_x() > N)

@@ -38,7 +38,11 @@ class Game{
     int multifood2y;
     int multifood3x;
     int multifood3y;    
-    bool setspecial;
+    bool multiactive;
+    int roundactive;
+    Fruct deadlyfood;
+    int deadfoodx;
+    int deadfoody;
 
     void Tick();
     
