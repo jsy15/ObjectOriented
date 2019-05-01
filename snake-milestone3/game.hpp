@@ -59,7 +59,8 @@ struct event_source{
     std::vector<event_listener*> listeners;
 };
 
-class Game : event_listener{
+class Game : public event_listener{
+    public:
     Snake s[100];
     Fruct f;
     Trigger specf;
@@ -98,7 +99,14 @@ class Game : event_listener{
     int deadlyfoodround;
     bool deadlyactive;
     RenderWindow window;
+    Texture t1, t2, t3, t4, t5, t6, t7, t8, t9;
+    Sprite sprite1, sprite2, sprite3, sprite4, sprite5, sprite6, sprite7, sprite8, sprite9;
 
+
+    Clock clock;
+
+    float timer = 0;
+    float delay = 0.1;
     void Tick();
     
     public:
@@ -106,6 +114,7 @@ class Game : event_listener{
         : 
     window(VideoMode(480, 320), "Snake Game!")
     {
+        window.setFramerateLimit(15);
         N = 30;
         M = 20;
         dir = 4;
@@ -136,10 +145,49 @@ class Game : event_listener{
         deadfoody = (rand() % M);
         deadlyfoodround = 0;
         deadlyactive = false;
+        t1.loadFromFile("../images/white.png");
+        t2.loadFromFile("../images/red.png");
+        t3.loadFromFile("../images/purple.png");
+        t4.loadFromFile("../images/turquoise.png");
+        t5.loadFromFile("../images/pink.png");
+        t6.loadFromFile("../images/pink.png");
+        t7.loadFromFile("../images/pink.png");
+        t8.loadFromFile("../images/pink.png");
+        t9.loadFromFile("../images/green.png");
+        sprite1.setTexture(t1);
+        sprite2.setTexture(t2);
+        sprite3.setTexture(t3);
+        sprite4.setTexture(t4);
+        sprite5.setTexture(t5);
+        sprite6.setTexture(t6);
+        sprite7.setTexture(t7);
+        sprite8.setTexture(t8);
+        sprite9.setTexture(t9);
+        float timer = 0;
+        float delay = 0.1;
+        f.set_x(10);
+        f.set_y(10);
+        specf.set_x(-1);
+        specf.set_y(-1);
+        superfood.set_x(-1);
+        superfood.set_y(-1);
+        for(int i = 0; i < 4; ++i){
+            multifood[i].set_x(-1);
+            multifood[i].set_y(-1);
+        }
+        deadlyfood.set_x(-1);
+        deadlyfood.set_y(-1);
+
      };
     void play_game();
     void on_close() override;
     void on_key_press(sf::Event::KeyEvent) override;
+    void draw();
+    bool is_open() const { return window.isOpen(); }
+    void get_move() const;
+    void setup();
+    void getPositions();
+    void clockWork();
 
 };
 

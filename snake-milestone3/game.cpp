@@ -3,91 +3,53 @@
 #include <iostream>
 using namespace sf;
 
+void Game::draw(){
+    window.clear();
+
+    for(int i = 0; i < N; i++)
+        for(int j = 0; j < M; j++){
+            sprite1.setPosition(i * size, j * size);
+            window.draw(sprite1);
+        }
+    
+
+    for(int i = 0; i < num; i++){
+        sprite2.setPosition(s[i].get_x() * size, s[i].get_y() * size);
+        window.draw(sprite2);
+    }
+
+    sprite2.setPosition(f.get_x() * size, f.get_y() * size);
+    sprite3.setPosition(specf.get_x() * size, specf.get_y() * size);
+    sprite4.setPosition(superfood.get_x() * size, superfood.get_y() * size);
+    sprite5.setPosition(multifood[0].get_x() * size, multifood[0].get_y() * size);
+    sprite6.setPosition(multifood[1].get_x() * size, multifood[1].get_y() * size);
+    sprite7.setPosition(multifood[2].get_x() * size, multifood[2].get_y() * size);
+    sprite8.setPosition(multifood[3].get_x() * size, multifood[3].get_y() * size);
+    sprite9.setPosition(deadlyfood.get_x() * size, deadlyfood.get_y() * size);
+    window.draw(sprite2);
+    window.draw(sprite3);
+    window.draw(sprite4);
+    window.draw(sprite5);
+    window.draw(sprite6);
+    window.draw(sprite7);
+    window.draw(sprite8);
+    window.draw(sprite9);
+    window.display();
+}
+
+void Game::clockWork(){
+    float time = clock.getElapsedTime().asSeconds();
+    clock.restart();
+    timer += time;
+}
 
 void Game::play_game(){
 
-    window.setFramerateLimit(60);
 
-    Texture t1, t2, t3, t4, t5, t6, t7, t8, t9;
-
-    t1.loadFromFile("../images/white.png");
-    t2.loadFromFile("../images/red.png");
-    t3.loadFromFile("../images/purple.png");
-    t4.loadFromFile("../images/turquoise.png");
-    t5.loadFromFile("../images/pink.png");
-    t6.loadFromFile("../images/pink.png");
-    t7.loadFromFile("../images/pink.png");
-    t8.loadFromFile("../images/pink.png");
-    t9.loadFromFile("../images/green.png");
-    Sprite sprite1(t1);
-    Sprite sprite2(t2);
-    Sprite sprite3(t3);
-    Sprite sprite4(t4);
-    Sprite sprite5(t5);
-    Sprite sprite6(t6);
-    Sprite sprite7(t7);
-    Sprite sprite8(t8);
-    Sprite sprite9(t9);
-
-    Clock clock;
-
-    float timer = 0;
-    float delay = 0.1;
-
-    f.set_x(10);
-    f.set_y(10);
-    specf.set_x(-1);
-    specf.set_y(-1);
-    superfood.set_x(-1);
-    superfood.set_y(-1);
-    for(int i = 0; i < 4; ++i){
-        multifood[i].set_x(-1);
-        multifood[i].set_y(-1);
-    }
-    deadlyfood.set_x(-1);
-    deadlyfood.set_y(-1);
-
-    while(window.isOpen()){
-        float time = clock.getElapsedTime().asSeconds();
-        clock.restart();
-        timer += time;
-
-        Event e;
-        while(window.pollEvent(e)){
-            if(e.type == Event::Closed)
-                window.close();
-        }
-
-        bool firstlock = false;
-        int lockout = 0;
-
-        if(Keyboard::isKeyPressed(Keyboard::Left))
-            dir = 1;
-        if(Keyboard::isKeyPressed(Keyboard::Right))
-            dir = 2;
-        if(Keyboard::isKeyPressed(Keyboard::Up))
-            dir = 3;
-        if(Keyboard::isKeyPressed(Keyboard::Down))
-            dir = 0;
-        if(Keyboard::isKeyPressed(Keyboard::Q))
-            return;
-        if(Keyboard::isKeyPressed(Keyboard::L)){
-            while(true){
-                std::cout << "Firstlock is: " << firstlock << std::endl;
-                if(Keyboard::isKeyPressed(Keyboard::L) && lockout == 10){
-                    break;
-                }
-                firstlock = true;
-                lockout++;
-            }
-            firstlock = false;
-            lockout = 0;
-        }
-
-        if (timer > delay){
-            timer = 0;
-            Tick();
-        }
+        clockWork();
+        
+        
+        Tick();
 
         window.clear();
 
@@ -119,20 +81,32 @@ void Game::play_game(){
         window.draw(sprite7);
         window.draw(sprite8);
         window.draw(sprite9);
-
-
         window.display();
-    }
-    return;
 };
 
 void Game::on_close(){
+    window.close();
 }
 
 void Game::on_key_press(sf::Event::KeyEvent e) {  
-    if(e.code == sf::Keyboard::Left) {
-        std::cout << "mouse button left called/n";
-    }
+    if(Keyboard::isKeyPressed(Keyboard::Left))
+        dir = 1;
+    if(Keyboard::isKeyPressed(Keyboard::Right))
+        dir = 2;
+    if(Keyboard::isKeyPressed(Keyboard::Up))
+        dir = 3;
+    if(Keyboard::isKeyPressed(Keyboard::Down))
+        dir = 0;
+    if(Keyboard::isKeyPressed(Keyboard::Q))
+        window.close();
+}
+
+void Game::setup(){
+    
+}
+
+void Game::getPositions(){
+
 }
 
 void Game::Tick(){
